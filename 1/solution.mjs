@@ -1,36 +1,13 @@
 import fs from 'fs'
 
 class Problems {
-  getFileContents = () => {
-    if (!this.file) {
-      this.file = fs.readFileSync('input').toString().split("\n").map(l => parseInt(l));
-    }
-    return this.file
+  constructor() {
+    this.n = fs.readFileSync('input').toString().split("\n").map(l => parseInt(l));
   }
 
-  partOne = () => {
-    const numbers = this.getFileContents()
-    return numbers.reduce((count, line, index) => {
-      const current = line
-      const last = numbers[index-1]
+  partOne = () => this.n.reduce((c, l, i) => l > this.n[i-1] ? c+1 : c, 0)
 
-      if (current > last) return count+1
-      return count
-    }, 0)
-  }
-
-  partTwo = () => {
-    const numbers = this.getFileContents()
-    return numbers.reduce((count, line, index) => {
-      if (index < 3) return count
-
-      const currentWindow = line + numbers[index-1] + numbers[index-2]
-      const lastWindow = numbers[index-1] + numbers[index-2] + numbers[index-3]
-
-      if (currentWindow > lastWindow) return count+1
-      return count
-    }, 0)
-  }
+  partTwo = () => this.n.reduce((c, l, i) => (this.n[i+3] > l) ? c+1 : c, 0)
 
   solve = () => {
     console.log('Part One:', this.partOne())
