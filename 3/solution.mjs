@@ -10,11 +10,9 @@ class Problems {
 
   flipBits = num => num.split('').map(n => n === '1' ? '0' : '1').join('')
 
-  getEpsilon = input => this.flipBits(input)
-
   partOne = () => {
     this.gamma = this.getGamma(this.d)
-    this.epsilon = this.getEpsilon(this.gamma)
+    this.epsilon = this.flipBits(this.gamma)
     return parseInt(this.gamma, 2) * parseInt(this.epsilon, 2)
   }
 
@@ -25,7 +23,7 @@ class Problems {
     while (o.length > 1 || c.length > 1) {
       const newOxygens = o.filter(e => e[i] === this.getGamma(o).split('')[i])
       o = newOxygens[0] ? newOxygens : o
-      const newCarbons = c.filter(e => e[i] === this.getEpsilon(this.getGamma(c)).split('')[i])
+      const newCarbons = c.filter(e => e[i] === this.flipBits(this.getGamma(c)).split('')[i])
       c = newCarbons[0] ? newCarbons : c
       i++
     }
