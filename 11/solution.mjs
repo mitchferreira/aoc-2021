@@ -49,7 +49,7 @@ class Problems {
       })
     })
 
-    if (thisStep === this.totalOctopuses) this.simultaneous = this.step
+    if (thisStep === this.totalOctopuses) this.simultaneous = this.simultaneous ? this.simultaneous : this.step
   }
 
   partOne = () => {
